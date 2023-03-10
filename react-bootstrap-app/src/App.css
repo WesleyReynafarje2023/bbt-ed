@@ -1,0 +1,18 @@
+.App{
+    background-color: rgb(0, 0, 0);
+}
+
+.Card {
+    background-color: rgb(56, 56, 56);
+    height: 100vh;
+}
+.Card-Header {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 40;
+}
+
+.Card-Body {
+    background-color: rgb(27, 27, 27);
+    color: white;
+}
