@@ -6,10 +6,11 @@
     background-color: rgb(56, 56, 56);
     height: 100vh;
 }
-.Card-Header {
-    background-color: rgb(0, 0, 0);
-    color: white;
-    font-size: 40;
+.Card-Header *{
+    background-color: rgb(56, 56, 56);
+    white-space: initial;
+    color: rgb(155, 155, 155);
+    text-align: center;
 }
 
 .Card-Body {
