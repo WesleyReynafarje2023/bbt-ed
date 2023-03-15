@@ -1,21 +1,27 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
-import {Card, Col, Row} from "react-bootstrap"
+import {Card, Col, Row, Button} from "react-bootstrap"
 import './App.css';
 
 import bigSheldon from './images/tbbt_logo.png'
 
-//https://www.pluralsight.com/guides/how-to-set-up-a-react-bootstrap-app
-
 function App() {
 
-  const [data, setdata] = useState(fetch("https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt363395/bbt/episode-index/0"));
+  const [currentEpisode, setCurrentEpisode] = useState(getEpisode(0));
 
-  useEffect(() => {
-    fetch("https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt363395/bbt/episode-index/0")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  });
+  function getEpisode(x){
+    fetch("https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt363395/bbt/episode-index/" + x)
+      .then(response => {
+        if(response.ok){
+          return response.json
+        }
+      })
+  };
+
+  const onClick = () => {
+    setCurrentEpisode(getEpisode(1));
+    console.log(currentEpisode)
+  };
 
   return(
       <div className="App">
@@ -32,7 +38,7 @@ function App() {
             </Row>
           </Card.Header>
           <Card.Body className="Card-Body">
-            s
+            <Button onClick={onClick}> s</Button>
           </Card.Body>
         </Card> 
       </div>
