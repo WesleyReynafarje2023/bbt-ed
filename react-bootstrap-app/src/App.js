@@ -7,21 +7,17 @@ import bigSheldon from './images/tbbt_logo.png'
 
 function App() {
 
-  const [currentEpisode, setCurrentEpisode] = useState(getEpisode(0));
+  const [currentEpisode, setCurrentEpisode] = useState(getEpisode(1));
 
   function getEpisode(x){
-    fetch("https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt363395/bbt/episode-index/" + x)
-      .then(response => {
-        if(response.ok){
-          return response.json
-        }
-      })
+    return fetch("https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt363395/bbt/episode-index/" + x)
+      .then((response) => response.json())
+
   };
 
-  const onClick = () => {
-    setCurrentEpisode(getEpisode(1));
-    console.log(currentEpisode)
-  };
+  const onClick = (index) => {
+    setCurrentEpisode(getEpisode(1))
+  }
 
   return(
       <div className="App">
@@ -38,7 +34,8 @@ function App() {
             </Row>
           </Card.Header>
           <Card.Body className="Card-Body">
-            <Button onClick={onClick}> s</Button>
+            <Button onClick={() => onClick(0)}> s</Button>
+            <Button onClick={() => onClick(1)}> s</Button>
           </Card.Body>
         </Card> 
       </div>
