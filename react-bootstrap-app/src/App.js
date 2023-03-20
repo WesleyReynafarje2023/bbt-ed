@@ -2,21 +2,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import {Card, Col, Row, Button} from "react-bootstrap"
 import './App.css';
+import EpisodeList from './EpisodeList';
 
 import bigSheldon from './images/tbbt_logo.png'
 
 function App() {
 
-  const [currentEpisode, setCurrentEpisode] = useState(getEpisode(1));
+  const [episodeIndex, setEpisodeIndex] = useState([]);
 
-  function getEpisode(x){
-    return fetch("https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt363395/bbt/episode-index/" + x)
-      .then((response) => response.json())
+  useEffect(() => {
+    fetch("https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt363395/bbt/episodes")
+    .then((response) => response.json())
+    .then((data) => {
+      setEpisodeIndex(data.data._embedded.episodes)
+    });
 
-  };
+  },[])
 
-  const onClick = (index) => {
-    setCurrentEpisode(getEpisode(1))
+  const onClick = (episodeNum) => {
+    console.log(episodeIndex[episodeNum])
   }
 
   return(
@@ -34,8 +38,7 @@ function App() {
             </Row>
           </Card.Header>
           <Card.Body className="Card-Body">
-            <Button onClick={() => onClick(0)}> s</Button>
-            <Button onClick={() => onClick(1)}> s</Button>
+            <EpisodeList> episodeList={props.episodeList} </EpisodeList>
           </Card.Body>
         </Card> 
       </div>
