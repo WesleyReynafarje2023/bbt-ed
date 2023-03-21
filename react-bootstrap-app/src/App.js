@@ -9,12 +9,14 @@ import bigSheldon from './images/tbbt_logo.png'
 function App() {
 
   const [episodeIndex, setEpisodeIndex] = useState([]);
-
+  
   useEffect(() => {
     fetch("https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt363395/bbt/episodes")
-    .then((response) => response.json())
+    .then((res) => res.json())
     .then((data) => {
-      setEpisodeIndex(data.data._embedded.episodes)
+      const episodes = data.data._embedded.episodes
+      setEpisodeIndex(episodes)
+      console.log("Fetched")
     });
 
   },[])
@@ -38,7 +40,8 @@ function App() {
             </Row>
           </Card.Header>
           <Card.Body className="Card-Body">
-            <EpisodeList> episodeList={props.episodeList} </EpisodeList>
+            {episodeIndex[1].name}
+            <EpisodeList>  </EpisodeList>
           </Card.Body>
         </Card> 
       </div>
