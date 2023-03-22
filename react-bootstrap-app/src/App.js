@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
-import {Card, Col, Row, Button} from "react-bootstrap"
+import {Card, Col, Row, Button, ListGroup} from "react-bootstrap"
 import './App.css';
 import EpisodeList from './EpisodeList';
 
@@ -9,20 +9,36 @@ import bigSheldon from './images/tbbt_logo.png'
 function App() {
 
   const [episodeIndex, setEpisodeIndex] = useState([]);
+  const [episode, setEpisode] = useState({
+    "id": 2913,
+    "url": "http://www.tvmaze.com/episodes/2913/the-big-bang-theory-1x01-pilot",
+    "name": "Pilot",
+    "season": 1,
+    "number": 1,
+    "airdate": "2007-09-24",
+    "airtime": "20:30",
+    "airstamp": "2007-09-25T00:30:00+00:00",
+    "runtime": 30,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/4/12368.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/4/12368.jpg"
+    },
+    "summary": "<p>Is a comedy about brilliant physicists, Leonard and Sheldon, who are the kind of \"beautiful minds\" that understand how the universe works. But none of that genius helps them interact with people, especially women. All this begins to change when a free-spirited beauty named Penny moves in next door. Sheldon, Leonard's roommate, is quite content spending his nights playing Klingon Boggle with their socially dysfunctional friends, fellow Cal Tech scientists Wolowitz and Koothrappali. However, Leonard sees in Penny a whole new universe of possibilities... including love.</p>",
+    "_links": { "self": { "href": "http://api.tvmaze.com/episodes/2913" } }
+  })
   
   useEffect(() => {
     fetch("https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt363395/bbt/episodes")
-    .then((res) => res.json())
-    .then((data) => {
-      const episodes = data.data._embedded.episodes
-      setEpisodeIndex(episodes)
-      console.log("Fetched")
+    .then(res => res.json())
+    .then(data => {
+      const episodedata = data.data._embedded.episodes
+      setEpisodeIndex(episodedata)
     });
-
   },[])
 
   const onClick = (episodeNum) => {
-    console.log(episodeIndex[episodeNum])
+    setEpisode(episodeIndex[episodeNum])
+    
   }
 
   return(
@@ -40,8 +56,9 @@ function App() {
             </Row>
           </Card.Header>
           <Card.Body className="Card-Body">
-            {episodeIndex[1].name}
-            <EpisodeList>  </EpisodeList>
+            {episode.name}
+            <Button onClick={() => {onClick(1)}}> 1 </Button>
+            <EpisodeList episodeIndex={episodeIndex}>  </EpisodeList>
           </Card.Body>
         </Card> 
       </div>
