@@ -5,18 +5,26 @@ function EpisodeList(props) {
 
     return (
       <Card className="Episode-List-Card">
-        <Card.Header className="Card-Header">
-            <Card.Title style={{fontSize:"20px"}}>Episode List</Card.Title>
+        <Card.Header style={{fontSize:"20px"}} className="Card-Header">
+            Episode List
         </Card.Header>
-    
+        <ListGroup className="List-Group">
           {props.episodeIndex.map((ep, id) => {
-                return (
-                  <div className="episode-item" key={id}>
+                if(id == props.episodeIndex.findIndex(x => x.name === props.episode.name))
+                {return (
+                  <ListGroup.Item className="Selected-Episode-Item" key={id} onClick={() => {props.onClick(id)}}>
                     {ep.name}
-                  </div>
-                )
+                  </ListGroup.Item>
+                )}
+                else{
+                  return (
+                    <ListGroup.Item className="Episode-Item" key={id} onClick={() => {props.onClick(id)}}>
+                      {ep.name}
+                    </ListGroup.Item>
+                  )
+                }
               })}
-
+        </ListGroup>
       </Card>
     )
   }

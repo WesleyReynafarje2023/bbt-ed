@@ -6,14 +6,37 @@
     background-color: rgb(56, 56, 56);
     height: 100vh;
 }
+
+.Episode-List-Card {
+    background-color: rgb(56, 56, 56);
+    height: 82vh;
+}
+
 .Card-Header *{
     background-color: rgb(56, 56, 56);
     white-space: initial;
-    color: rgb(155, 155, 155);
-    text-align: center;
+    color: rgb(255, 255, 255);
+    text-align: center;   
 }
 
 .Card-Body {
     background-color: rgb(27, 27, 27);
     color: white;
+}
+
+.Episode-Item {
+    background-color: rgb(27, 27, 27);
+    color: white;
+}
+
+.List-Group {
+    max-height: 100vh;
+    margin-bottom: 10px;
+    overflow-y:auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.Episode-Pic {
+    width: '100%',
+   
 }

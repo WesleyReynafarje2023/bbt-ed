@@ -38,7 +38,7 @@ function App() {
 
   const onClick = (episodeNum) => {
     setEpisode(episodeIndex[episodeNum])
-    
+    console.log(episode)
   }
 
   return(
@@ -47,18 +47,39 @@ function App() {
           <Card.Header className="Card-Header">
             <Row>
               <Col>
-                <Card.Title style={{fontSize:"30px", marginTop:20 }}>The Big Bang Theory</Card.Title>
-                <Card.Title style={{fontSize:"20px"}}>Episode Directory</Card.Title>
+                <img src={bigSheldon} alt="TBBT Logo" width="300"/>
               </Col>
               <Col>
-                <img src={bigSheldon} alt="TBBT Logo" width="300"/>
+                <Card.Title style={{fontSize:"30px", marginTop:20 }}>The Big Bang Theory</Card.Title>
+                <Card.Title style={{fontSize:"20px"}}>Episode Directory</Card.Title>
               </Col>
             </Row>
           </Card.Header>
           <Card.Body className="Card-Body">
-            {episode.name}
-            <Button onClick={() => {onClick(1)}}> 1 </Button>
-            <EpisodeList episodeIndex={episodeIndex}>  </EpisodeList>
+            <Row>
+              <Col>
+                <EpisodeList episodeIndex={episodeIndex} episode={episode} onClick={onClick}>  </EpisodeList>
+              </Col>
+              <Col>
+                <Card className="Episode-List-Card">
+                  <Card.Header style={{fontSize:"20px"}} className="Card-Header">
+                    Current Episode
+                  </Card.Header>
+                  <Col>
+                    <Row>
+                      <img className="Episode-Pic" src={episode.image.original} alt="new"/>
+                    </Row>
+                    <Row >
+                      <Card.Title> S{episode.season} E{episode.number} {episode.name}</Card.Title>
+                      <Card.Text>{episode.summary.replace(/<[^>]+>/g, '')}</Card.Text>
+                    </Row>
+                    <Row>
+                      <Card.Text style={{fontSize:"10px"}}>{episode.airdate} </Card.Text>
+                    </Row>
+                  </Col>
+               </Card>
+              </Col>
+            </Row>
           </Card.Body>
         </Card> 
       </div>
